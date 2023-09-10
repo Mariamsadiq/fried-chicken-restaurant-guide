@@ -2,29 +2,28 @@ import React, { useState } from 'react';
 import './App.css';
 import Resturant from './components/Resturant';
 import StarRating from './components/StarRating';
-import FriedChicken from './image/fried-chicken.png'
-import Run from './image/run.png'
-import Background from './image/background.png'
 
 function App() {
-  const [name, setName] = useState('');
-  const [address, setAddress] = useState('');
-  const [description, setDescription] = useState('');
-  const [rate, setRate] = useState('');
+  const [restaurant, setRestaurant] = useState({
+    name: '',
+    address: '',
+    description: '',
+    rate: '',
+  });
   const [restList, setRestList] = useState([]);
 
   const addRest = (e) => {
     e.preventDefault();
-    if (name && address && description && rate) {
-      setRestList([...restList,
-      { name: name, address: address, description: description, rate: rate }]);
-      setName('');
-      setAddress('');
-      setDescription('');
-      setRate('');
-      alert('Thanks for your help :)');
+    if (restaurant.name && restaurant.address && restaurant.description && restaurant.rate) {
+      setRestList([...restList, { ...restaurant }]);
+      setRestaurant({
+        name: '',
+        address: '',
+        description: '',
+        rate: '',
+      });
     } else {
-      alert('Please fill in all fields before adding a restaurant.');
+      // Optionally, you can add some form validation feedback here
     }
   }
 
@@ -36,61 +35,48 @@ function App() {
   };
 
   return (
-    <>
-      <div className="App">
-        <header className='header'>
-          <img className='imageright' src={FriedChicken} alt="Fried Chicken" />
-          <h3> Let's help Mohammed to Find the best Fried Chicken resturnt in the town <br></br> Add Your fav. resturant now :) </h3>
-          <img className='imageLeft' src={Run} alt='Image' />
-        </header>
-<div className="main">
-<form>
-          <label> Resturant Name </label>
-          <input type="text" id='name' placeholder="Lee's" onChange={(e) => {
-            setName(e.target.value)
-          }} />
-        </form>
-
-        <form>
+    <div className="App">
+      <header className='header'>
+        <h3>  Find the best Fried Chicken Restaurant </h3>
+      </header>
+      <div className="main">
+        <form onSubmit={addRest}>
+          <label> Restaurant Name </label>
+          <input
+            type="text"
+            value={restaurant.name}
+            onChange={(e) => setRestaurant({ ...restaurant, name: e.target.value })}
+          />
           <label> Address  </label>
-          <input type="text" id='location' placeholder="Al-jadreyah - Baghdad" onChange={(e) => {
-            setAddress(e.target.value)
-          }} />
-        </form>
-
-        <form>
+          <input
+            type="text"
+            value={restaurant.address}
+            onChange={(e) => setRestaurant({ ...restaurant, address: e.target.value })}
+          />
           <label> Description  </label>
-          <textarea id='description' placeholder="Describe the Restaurant here" onChange={(e) => {
-            setDescription(e.target.value)
-          }} />
-        </form>
-
-        <form>
+          <textarea
+            value={restaurant.description}
+            onChange={(e) => setRestaurant({ ...restaurant, description: e.target.value })}
+          />
           <label> Rate  </label>
-          {/* <input type="number" id='rate' min={0} max={5} onChange={(e) => {
-            setRate(e.target.value)
-          }} /> */}
-          <StarRating rating={rate} onRate={setRate} />
+          <StarRating rating={restaurant.rate} onRate={(rate) => setRestaurant({ ...restaurant, rate })} />
+          <button type="submit"> Add your Suggestion </button>
         </form>
-        <form>
-          <button onClick={addRest}> Add your Suggest </button>
-        </form>
-
-</div>
-        
-
-
       </div>
       <div className="showResturants">
-        {restList.map((resturant) => {
-          return < Resturant name={resturant.name} address={resturant.address} description={resturant.description} rate={resturant.rate} onDelete={handleDelete} />;
-        })}
+        {restList.map((restaurant) => (
+          <Resturant
+            key={restaurant.name}
+            name={restaurant.name}
+            address={restaurant.address}
+            description={restaurant.description}
+            rate={restaurant.rate}
+            onDelete={handleDelete}
+          />
+        ))}
       </div>
-
-<div>
-  <img className='background' src={Background} alt="" />
-</div>
-    </>);
+    </div>
+  );
 }
 
 export default App;

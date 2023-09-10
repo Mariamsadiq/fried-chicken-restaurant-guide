@@ -1,61 +1,43 @@
+/* Resturant.css */
+
 .resturant {
-    width: 40%;
     display: flex;
-    flex: 0 0 300px;
-    flex-direction: column;
-    align-items: center;
-    min-height: fit-content;
-    text-align: left;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 10px;
-    background-color: #dddddd;
-    box-shadow: 1px 1px 1px rgb(113, 113, 113);
-    z-index: 1;
-}
-
-.section {
-    display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
-    width: 99%;
-    padding: 10px;
+    justify-content: space-between;
+    border: 2px solid #ddd;
+    padding: 20px;
     border-radius: 10px;
-    background-color: #fffff4;
-    margin: 5px ;
-    margin-top: 5px;
-    box-shadow: 1px 1px 1px rgb(113, 113, 113);
-    z-index: 99;
-}
-
-h4 {
-    font-size: 16px;
-    border-bottom: 2px solid #e20000;
-    width: 100%;
-    color: rgb(67, 67, 67);
-}
-
-p {
-    font-size: 14px;
-    font-weight: lighter;
-    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .section {
+    flex: 1;
     padding: 10px;
-}
-
-.btn_delete {
-    width: 30px;
-    background-color: rgb(224, 22, 0);
-    border-radius: 999rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    right: -98px;
+  }
+  
+  .section h4 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  
+  .section p {
+    font-size: 16px;
+    margin: 0;
+  }
+  
+  .btn_delete {
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
     cursor: pointer;
-    width: 5rem;
-    box-shadow: 1px 1px 1px rgb(113, 113, 113);
-}
-
-.btn_delete_icon {
-    width: 20px;
-}
+    transition: background-color 0.3s;
+  }
+  
+  .btn_delete:hover {
+    background-color: #ff4040;
+  }
+  
